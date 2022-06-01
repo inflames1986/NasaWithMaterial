@@ -10,13 +10,13 @@
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="today">Сегодня</string>
     <string name="tdby" translatable="false">Позавчера</string>
-    <string name="yesterday">Вчера</string>
-    <string name="earth">Earth</string>
-    <string name="mars">Mars</string>
-    <string name="system">System</string>
-    <string name="on_second_screen">На экран 2</string>
-    <string name="on_first_screen">На экран 1</string>
-    <string name="info">Info</string>
-    <string name="popup_reminder">Popup reminder</string>
+    <string name="yesterday" translatable="false">Yesterday</string>
+    <string name="earth" translatable="false">Earth</string>
+    <string name="mars" translatable="false">Mars</string>
+    <string name="system" translatable="false">System</string>
+    <string name="on_second_screen" translatable="false">На экран 2</string>
+    <string name="on_first_screen" translatable="false">На экран 1</string>
+    <string name="info" translatable="false">Info</string>
+    <string name="popup_reminder" translatable="false">Popup reminder</string>
 
 </resources>
