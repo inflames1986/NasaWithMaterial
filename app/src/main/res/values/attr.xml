@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+        <attr name="superColor" format="reference" />
+        <attr name="myTabLayout" format="reference"/>
+        <!--  TODO HW создать свой атрибут  -->
+
+</resources>
