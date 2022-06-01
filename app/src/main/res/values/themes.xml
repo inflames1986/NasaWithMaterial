@@ -13,7 +13,7 @@
         <item name="colorSecondaryContainer">?superColor</item>
         <item name="colorOnSecondaryContainer">?superColor</item>
         <item name="colorTertiary">?superColor</item>
-        <item name="colorOnTertiary">@color/white</item>
+        <item name="colorOnTertiary">?darkSuperColor</item>
         <item name="colorTertiaryContainer">?superColor</item>
         <item name="colorOnTertiaryContainer">?superColor</item>
 
@@ -36,14 +36,18 @@
 
     <style name="MyRedTheme" parent="MyBaseTheme">
         <item name="superColor">@color/red</item>
+        <item name="darkSuperColor">@color/grey</item>
     </style>
 
     <style name="MyGreenTheme" parent="MyBaseTheme">
         <item name="superColor">@color/green</item>
+        <item name="darkSuperColor">@color/grey</item>
     </style>
 
     <style name="MyBlueTheme" parent="MyBaseTheme">
         <item name="superColor">@color/blue</item>
+        <item name="darkSuperColor">@color/grey</item>
     </style>
 
+    <color name="grey">#D5494646</color>
 </resources>
