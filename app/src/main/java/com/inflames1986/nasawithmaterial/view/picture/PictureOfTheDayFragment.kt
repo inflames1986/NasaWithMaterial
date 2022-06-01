@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.chip.Chip
@@ -141,14 +142,20 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState) {
         when (pictureOfTheDayAppState) {
             is PictureOfTheDayAppState.Error -> {}
             is PictureOfTheDayAppState.Loading -> {}
             is PictureOfTheDayAppState.Success -> {
+
+
                 binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url){
-                    // TODO HW скрасить ожидание картинки
+                    crossfade(true)
+                    placeholder(R.drawable.bg_earth)
+                    transformations(CircleCropTransformation())
                 }
+
                 binding.lifeHack.title.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title
                 binding.lifeHack.explanation.text =
