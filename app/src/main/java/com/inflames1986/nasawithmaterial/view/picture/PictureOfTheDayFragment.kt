@@ -151,7 +151,8 @@ class PictureOfTheDayFragment : Fragment() {
                 }
                 binding.lifeHack.title.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title
-
+                binding.lifeHack.explanation.text =
+                    pictureOfTheDayAppState.pictureOfTheDayResponseData.explanation
             }
         }
     }
