@@ -8,9 +8,9 @@
     <string name="search" translatable="false">Search</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
-    <string name="today">Today</string>
-    <string name="tdby" translatable="false">TDBY</string>
-    <string name="yesterday">Yesterday</string>
+    <string name="today">Сегодня</string>
+    <string name="tdby" translatable="false">Позавчера</string>
+    <string name="yesterday">Вчера</string>
     <string name="earth">Earth</string>
     <string name="mars">Mars</string>
     <string name="system">System</string>
