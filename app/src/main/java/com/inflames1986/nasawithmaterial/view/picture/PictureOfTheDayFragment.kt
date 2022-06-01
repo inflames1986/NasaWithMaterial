@@ -55,7 +55,7 @@ class PictureOfTheDayFragment : Fragment() {
                 Log.d("@@@", "app_bar_settings")
 //                requireActivity().supportFragmentManager.beginTransaction()
 //                    .replace(R.id.container,SettingsFragment.newInstance()).commit()
-//                // TODO HW addToBAckstack
+
             }
             android.R.id.home -> {
                 BottomNavigationDrawerFragment.newInstance()
@@ -83,8 +83,6 @@ class PictureOfTheDayFragment : Fragment() {
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.lifeHack.bottomSheetContainer)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
 
-        /*binding.lifeHack.bottomSheetContainer.z= 40f
-        binding.fab.z= 100f*/
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -112,12 +110,12 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_back_fab))
-                // TODO HW  binding.bottomAppBar.replaceMenu(// R.menu. какое-то другое меню)
+                binding.bottomAppBar.replaceMenu(R.menu.menu_second_bottom_bar)
             }else{
                 binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar))
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
                 binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_plus_fab))
-                // TODO HW binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
             isMain = !isMain
         }
@@ -145,14 +143,18 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState) {
         when (pictureOfTheDayAppState) {
-            is PictureOfTheDayAppState.Error -> {}
-            is PictureOfTheDayAppState.Loading -> {}
+            is PictureOfTheDayAppState.Error -> {
+
+            }
+            is PictureOfTheDayAppState.Loading -> {
+                binding.imageView.load(R.drawable.nasa_logo)
+            }
             is PictureOfTheDayAppState.Success -> {
 
 
                 binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url){
                     crossfade(true)
-                    placeholder(R.drawable.bg_earth)
+                    placeholder(R.drawable.nasa_logo).transformations(CircleCropTransformation())
                     transformations(CircleCropTransformation())
                 }
 

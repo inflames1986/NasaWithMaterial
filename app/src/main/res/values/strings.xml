@@ -16,5 +16,7 @@
     <string name="system">System</string>
     <string name="on_second_screen">На экран 2</string>
     <string name="on_first_screen">На экран 1</string>
+    <string name="info">Info</string>
+    <string name="popup_reminder">Popup reminder</string>
 
 </resources>

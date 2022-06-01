@@ -1,5 +1,6 @@
 package com.inflames1986.nasawithmaterial.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -35,12 +36,16 @@ class PictureOfTheDayViewModel(
                     liveData.postValue(PictureOfTheDayAppState.Success(it))
                 }
             } else {
-                // TODO HW
+                Log.d("@@@", response.message())
             }
         }
 
         override fun onFailure(call: Call<PictureOfTheDayResponseData>, t: Throwable) {
-            // TODO HW
+            try {
+
+            } catch (e: IllegalStateException) {
+                Log.d("@@@", e.toString())
+            }
         }
     }
 }
