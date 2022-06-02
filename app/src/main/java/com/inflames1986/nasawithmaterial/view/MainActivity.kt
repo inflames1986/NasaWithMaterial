@@ -8,7 +8,7 @@ import com.inflames1986.nasawithmaterial.view.picture.PictureOfTheDayFragment
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.MyBlueTheme)
+        setTheme(R.style.MyGreenTheme)
         setContentView(R.layout.activity_main)
         if(savedInstanceState==null){
             supportFragmentManager.beginTransaction().replace(R.id.container,

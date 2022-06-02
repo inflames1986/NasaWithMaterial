@@ -18,5 +18,8 @@
     <string name="on_first_screen" translatable="false">На экран 1</string>
     <string name="info" translatable="false">Info</string>
     <string name="popup_reminder" translatable="false">Popup reminder</string>
+    <string name="menu_1">Меню 1</string>
+    <string name="menu_2">Меню 2</string>
+    <string name="menu_3">Меню 3</string>
 
 </resources>

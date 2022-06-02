@@ -17,6 +17,7 @@ import com.google.android.material.chip.Chip
 import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.FragmentPictureOfTheDayBinding
 import com.inflames1986.nasawithmaterial.view.MainActivity
+import com.inflames1986.nasawithmaterial.view.settings.SettingsFragment
 import com.inflames1986.nasawithmaterial.viewmodel.PictureOfTheDayAppState
 import com.inflames1986.nasawithmaterial.viewmodel.PictureOfTheDayViewModel
 
@@ -53,8 +54,8 @@ class PictureOfTheDayFragment : Fragment() {
             }
             R.id.app_bar_settings -> {
                 Log.d("@@@", "app_bar_settings")
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.container,SettingsFragment.newInstance()).commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, SettingsFragment.newInstance()).commit()
 
             }
             android.R.id.home -> {
