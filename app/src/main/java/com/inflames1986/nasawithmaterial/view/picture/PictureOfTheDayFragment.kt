@@ -55,7 +55,9 @@ class PictureOfTheDayFragment : Fragment() {
             R.id.app_bar_settings -> {
                 Log.d("@@@", "app_bar_settings")
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, SettingsFragment.newInstance()).commit()
+                    .replace(R.id.container, SettingsFragment.newInstance())
+                    .addToBackStack("0")
+                    .commit()
 
             }
             android.R.id.home -> {
