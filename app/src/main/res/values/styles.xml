@@ -24,7 +24,7 @@
 
     <style name="MyTabStyle" parent="Widget.MaterialComponents.TabLayout">
         <item name="tabUnboundedRipple">true</item>
-        <item name="tabRippleColor">#034AFF</item>
+        <item name="tabRippleColor">@drawable/my_ripple</item>
         <item name="tabIndicatorAnimationDuration">500</item>
     </style>
 
