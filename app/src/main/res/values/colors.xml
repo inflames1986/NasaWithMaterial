@@ -26,6 +26,7 @@
     <color name="ripple_color">#1544CD</color>
 
     <color name="colorAccent40Alfa">#66FBC7CC</color>
+    <color name="cardViewbcg">#BE51CBDA</color>
 
 
 </resources>

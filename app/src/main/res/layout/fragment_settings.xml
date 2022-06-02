@@ -55,4 +55,11 @@
             android:text="@string/menu_3" />
     </com.inflames1986.nasawithmaterial.utils.MyTabLayout>
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="20dp"
+        app:cardBackgroundColor="@color/cardViewbcg" />
+
 </LinearLayout>
