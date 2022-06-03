@@ -3,20 +3,19 @@ package com.inflames1986.nasawithmaterial.view
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.inflames1986.nasawithmaterial.R
+import com.inflames1986.nasawithmaterial.utils.BlueTheme
+import com.inflames1986.nasawithmaterial.utils.KEY_CURRENT_THEME
+import com.inflames1986.nasawithmaterial.utils.KEY_SP
+import com.inflames1986.nasawithmaterial.utils.RedTheme
 import com.inflames1986.nasawithmaterial.view.picture.PictureOfTheDayFragment
 
-const val RedTheme = 1
-const val BlueTheme = 2
+
 
 class MainActivity : AppCompatActivity() {
 
-    private val KEY_SP = "sp"
-    private val KEY_CURRENT_THEME = "current_theme"
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.MyGreenTheme)
+        setTheme(getRealStyle(getCurrentTheme()))
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().replace(

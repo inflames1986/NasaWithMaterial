@@ -21,5 +21,6 @@
     <string name="menu_1">Меню 1</string>
     <string name="menu_2">Меню 2</string>
     <string name="menu_3">Меню 3</string>
+    <string name="themes">themes</string>
 
 </resources>

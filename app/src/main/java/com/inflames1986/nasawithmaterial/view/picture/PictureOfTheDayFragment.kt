@@ -1,5 +1,6 @@
 package com.inflames1986.nasawithmaterial.view.picture
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +16,8 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.FragmentPictureOfTheDayBinding
+import com.inflames1986.nasawithmaterial.utils.BlueTheme
+import com.inflames1986.nasawithmaterial.utils.RedTheme
 import com.inflames1986.nasawithmaterial.view.MainActivity
 import com.inflames1986.nasawithmaterial.view.settings.SettingsFragment
 import com.inflames1986.nasawithmaterial.viewmodel.PictureOfTheDayAppState
@@ -28,6 +31,12 @@ class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
         get() = _binding!!
+
+    private lateinit var parentActivity: MainActivity // получаем родительскую активити
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        parentActivity = (context as MainActivity) // получаем родительскую активити
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +62,7 @@ class PictureOfTheDayFragment : Fragment() {
             R.id.app_bar_fav -> {
                 Log.d("@@@", "app_bar_fav")
             }
+
             R.id.app_bar_settings -> {
                 Log.d("@@@", "app_bar_settings")
                 requireActivity().supportFragmentManager.beginTransaction()
@@ -61,6 +71,16 @@ class PictureOfTheDayFragment : Fragment() {
                     .commit()
 
             }
+
+            R.id.app_bar_change_theme -> {
+                if (parentActivity.getCurrentTheme() == RedTheme) {
+                    parentActivity.setCurrentTheme(BlueTheme)
+                } else {
+                    parentActivity.setCurrentTheme(RedTheme)
+                }
+                parentActivity.recreate() // применяем для всей активити и для всех дочерних фрагментов RedTheme
+            }
+
             android.R.id.home -> {
                 BottomNavigationDrawerFragment.newInstance()
                     .show(requireActivity().supportFragmentManager, "")
@@ -153,14 +173,13 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-        private fun takeDate(count: Int): String {
-            val currentDate = Calendar.getInstance()
-            currentDate.add(Calendar.DAY_OF_MONTH, count)
-            val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            format1.timeZone = TimeZone.getTimeZone("EST")
-            return format1.format(currentDate.time)
-        }
-
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
+    }
 
 
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState) {
