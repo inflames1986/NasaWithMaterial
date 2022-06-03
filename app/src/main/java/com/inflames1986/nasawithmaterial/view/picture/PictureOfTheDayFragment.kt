@@ -24,7 +24,6 @@ import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
 
-
     var isMain = true
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding: FragmentPictureOfTheDayBinding
@@ -36,6 +35,7 @@ class PictureOfTheDayFragment : Fragment() {
     ): View {
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
