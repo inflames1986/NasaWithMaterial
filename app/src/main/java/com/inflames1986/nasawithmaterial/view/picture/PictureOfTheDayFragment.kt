@@ -13,13 +13,14 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.chip.Chip
 import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.FragmentPictureOfTheDayBinding
 import com.inflames1986.nasawithmaterial.view.MainActivity
 import com.inflames1986.nasawithmaterial.view.settings.SettingsFragment
 import com.inflames1986.nasawithmaterial.viewmodel.PictureOfTheDayAppState
 import com.inflames1986.nasawithmaterial.viewmodel.PictureOfTheDayViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -109,39 +110,57 @@ class PictureOfTheDayFragment : Fragment() {
         setHasOptionsMenu(true)
 
         binding.fab.setOnClickListener {
-            if(isMain){
+            if (isMain) {
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_back_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_back_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_second_bottom_bar)
-            }else{
-                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar))
+            } else {
+                binding.bottomAppBar.navigationIcon = (ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_hamburger_menu_bottom_bar
+                ))
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_plus_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
             isMain = !isMain
         }
 
 
-        binding.chipGroup.setOnCheckedChangeListener { group, position ->
-            /* TODO HW
-             when(position){
-                1->{viewModel.sendRequestToday()}
-                2->{viewModel.sendRequestYT()}
-                3->{viewModel.sendRequestTDBY()}
-            }
-
-            when(position){
-                1->{viewModel.sendRequest(date)}
-                2->{viewModel.sendRequest(date-1)}
-                3->{viewModel.sendRequest(date-2)}
-            }*/
-            group.findViewById<Chip>(position)?.let{
-                Log.d("@@@", "${it.text.toString()} $position")
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.tdby -> {
+                    viewModel.sendServerRequest(takeDate(-2))
+                }
+                R.id.yesterday -> {
+                    viewModel.sendServerRequest(takeDate(-1))
+                }
+                R.id.today -> {
+                    viewModel.sendServerRequest(takeDate(0))
+                }
             }
         }
     }
+
+        private fun takeDate(count: Int): String {
+            val currentDate = Calendar.getInstance()
+            currentDate.add(Calendar.DAY_OF_MONTH, count)
+            val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            format1.timeZone = TimeZone.getTimeZone("EST")
+            return format1.format(currentDate.time)
+        }
+
 
 
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState) {
@@ -155,7 +174,7 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayAppState.Success -> {
 
 
-                binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url){
+                binding.imageView.load(pictureOfTheDayAppState.pictureOfTheDayResponseData.url) {
                     crossfade(true)
                     placeholder(R.drawable.nasa_logo).transformations(CircleCropTransformation())
                     transformations(CircleCropTransformation())

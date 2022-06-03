@@ -26,6 +26,16 @@ class PictureOfTheDayViewModel(
             .enqueue(callback)
     }
 
+    fun sendServerRequest(date:String) {
+        liveData.value = PictureOfTheDayAppState.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            liveData.value = PictureOfTheDayAppState.Error(Throwable("wrong key"))
+        } else {
+            pictureOfTheDayRetrofitImpl.getRetrofit().getPictureOfTheDay(apiKey,date).enqueue(callback)
+        }
+    }
+
     private val callback = object : Callback<PictureOfTheDayResponseData> {
         override fun onResponse(
             call: Call<PictureOfTheDayResponseData>,

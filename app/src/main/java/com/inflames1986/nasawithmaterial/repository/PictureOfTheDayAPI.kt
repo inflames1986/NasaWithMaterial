@@ -9,4 +9,10 @@ import retrofit2.http.Query
 interface PictureOfTheDayAPI {
     @GET(GET_PICTURE_RETROFIT_ENDPOINT)
     fun getPictureOfTheDay(@Query(NASA_API_KEY) apiKey:String): Call<PictureOfTheDayResponseData>
+
+    @GET("planetary/apod")
+    fun getPictureOfTheDay(
+        @Query("api_key") apiKey:String,
+        @Query("date") date:String
+    ):Call<PictureOfTheDayResponseData>
 }
