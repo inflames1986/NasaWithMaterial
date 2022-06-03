@@ -11,6 +11,7 @@
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/drawable/ic_plus_fab.xml" value="0.2615" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/drawable/my_navigation_bar_item_tint.xml" value="0.1965" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/drawable/my_ripple.xml" value="0.223" />
+        <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/activity_api.xml" value="0.23697916666666666" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/activity_main.xml" value="0.109375" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/bottom_navigation_layout.xml" value="0.18541666666666667" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/bottom_sheet_layout.xml" value="0.184375" />
@@ -19,6 +20,7 @@
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/fragment_picture_of_the_day.xml" value="0.22" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/fragment_settings.xml" value="0.3614583333333333" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/layout/fragment_system.xml" value="0.23958333333333334" />
+        <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.23802083333333332" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/menu/menu_bottom_bar.xml" value="0.184375" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/menu/menu_bottom_navigation_drawer.xml" value="0.18541666666666667" />
         <entry key="..\:/JAVA/NasaWithMaterial/app/src/main/res/menu/menu_second_bottom_bar.xml" value="0.3614583333333333" />
