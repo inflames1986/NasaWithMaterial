@@ -9,7 +9,7 @@ import com.inflames1986.nasawithmaterial.view.navigation.SystemFragment
 
 class ViewPagerAdapter(private val fm: FragmentManager): FragmentStatePagerAdapter(fm) {
 
-    private val fragments = arrayOf(EarthFragment(), SystemFragment(), MarsFragment())//TODO HW зафиксировать фрагменты на своих местах
+    private val fragments = arrayOf(EarthFragment(), SystemFragment(), MarsFragment())
 
     override fun getCount(): Int {
         return fragments.size
