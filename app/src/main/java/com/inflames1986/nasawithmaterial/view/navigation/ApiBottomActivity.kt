@@ -35,13 +35,13 @@ class ApiBottomActivity : AppCompatActivity() {
             }
         }
 
-//        binding.bottomNavigation.selectedItemId = R.id.action_bottom_navigation_mars
-//
-//        val badge = binding.bottomNavigation.getOrCreateBadge(R.id.action_bottom_navigation_mars)
-//        badge.number = 100000000
-//        badge.maxCharacterCount = 6
-//        badge.badgeGravity = BadgeDrawable.TOP_START
-//        //binding.bottomNavigation.removeBadge(R.id.action_bottom_navigation_mars)
+        binding.bottomNavigation.selectedItemId = R.id.action_bottom_navigation_mars
+
+        val badge = binding.bottomNavigation.getOrCreateBadge(R.id.action_bottom_navigation_mars)
+        badge.number = 99999
+        badge.maxCharacterCount = 6
+        badge.badgeGravity = BadgeDrawable.TOP_END
+        binding.bottomNavigation.removeBadge(R.id.action_bottom_navigation_mars)
 //        binding.bottomNavigation.menu.removeItem(R.id.action_bottom_navigation_earth)
 //        binding.bottomNavigation.menu.removeItem(R.id.action_bottom_navigation_system)
 //        binding.bottomNavigation.inflateMenu(R.menu.menu_bottom_navigation_drawer)
