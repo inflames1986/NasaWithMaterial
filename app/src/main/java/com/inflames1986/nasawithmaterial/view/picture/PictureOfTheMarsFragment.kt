@@ -1,6 +1,5 @@
 package com.inflames1986.nasawithmaterial.view.picture
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import com.google.android.material.snackbar.Snackbar
 import com.inflames1986.nasawithmaterial.databinding.FragmentPictureOfTheMarsBinding
-import com.inflames1986.nasawithmaterial.view.MainActivity
 import com.inflames1986.nasawithmaterial.viewmodel.AppState
 import com.inflames1986.nasawithmaterial.viewmodel.OneBigFatViewModel
 import java.text.SimpleDateFormat
@@ -29,23 +27,17 @@ class PictureOfTheMarsFragment : Fragment() {
     ): View {
         _binding = FragmentPictureOfTheMarsBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     private val viewModel: OneBigFatViewModel by lazy {
         ViewModelProvider(this).get(OneBigFatViewModel::class.java)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.getLiveData().observe(viewLifecycleOwner) { render(it) }
         viewModel.getMarsPicture()
-
-        (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
-        setHasOptionsMenu(true)
-
 
     }
 

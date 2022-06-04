@@ -26,5 +26,6 @@
     <string name="marsTxt">Mars</string>
     <string name="systemTxt">System</string>
     <string name="photo_of_the_mars_stub">Mars</string>
+    <string name="photo_of_the_earth_stub">Earth</string>
 
 </resources>

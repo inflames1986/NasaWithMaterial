@@ -6,11 +6,11 @@
     android:background="#C8292525">
 
     <com.inflames1986.nasawithmaterial.utils.EquilateralImageView
-        android:id="@+id/marsImageView"
+        android:id="@+id/earthImageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:contentDescription="@string/photo_of_the_mars_stub"
+        android:contentDescription="@string/photo_of_the_earth_stub"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
