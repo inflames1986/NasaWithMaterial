@@ -6,7 +6,9 @@
         <item name="itemIconTint">@drawable/my_navigation_bar_item_tint</item>
         <item name="itemTextColor">@drawable/my_navigation_bar_item_tint</item>
         <item name="itemRippleColor">@drawable/my_ripple</item>
-        <!--        TODO HW Примените свою тему для BottomNavigationView.-->
+<!--        <item name="itemBackground">@drawable/earth</item>-->
+<!--        <item name="itemHorizontalTranslationEnabled">true</item>-->
+
     </style>
 
     <style name="MyChipStyle" parent="Widget.MaterialComponents.Chip.Choice">

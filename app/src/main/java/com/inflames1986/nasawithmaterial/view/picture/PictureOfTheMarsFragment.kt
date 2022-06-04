@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.google.android.material.snackbar.Snackbar
+import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.FragmentPictureOfTheMarsBinding
 import com.inflames1986.nasawithmaterial.viewmodel.AppState
 import com.inflames1986.nasawithmaterial.viewmodel.OneBigFatViewModel
@@ -65,7 +67,11 @@ class PictureOfTheMarsFragment : Fragment() {
                     ).show()
                 } else {
                     val url = appState.serverResponseData.photos.first().imgSrc
-                    binding.marsImageView.load(url)
+                    binding.marsImageView.load(url){
+                        crossfade(true)
+                        placeholder(R.drawable.nasa_logo).transformations(CircleCropTransformation())
+                        transformations(CircleCropTransformation())
+                    }
                 }
             }
         }

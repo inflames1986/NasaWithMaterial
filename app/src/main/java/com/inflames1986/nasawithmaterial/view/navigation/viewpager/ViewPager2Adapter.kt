@@ -6,11 +6,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.inflames1986.nasawithmaterial.view.navigation.EarthFragment
 import com.inflames1986.nasawithmaterial.view.navigation.MarsFragment
 import com.inflames1986.nasawithmaterial.view.navigation.SystemFragment
+import com.inflames1986.nasawithmaterial.view.picture.PictureOfTheEarthFragment
+import com.inflames1986.nasawithmaterial.view.picture.PictureOfTheMarsFragment
 
 class ViewPager2Adapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     override fun getItemCount(): Int = fragments.size
 
-    private val fragments = arrayOf(EarthFragment(),  SystemFragment(), MarsFragment())
+    private val fragments = arrayOf(PictureOfTheEarthFragment(), PictureOfTheMarsFragment(),  SystemFragment() )
     override fun createFragment(position: Int): Fragment {
         return fragments[position]
     }
