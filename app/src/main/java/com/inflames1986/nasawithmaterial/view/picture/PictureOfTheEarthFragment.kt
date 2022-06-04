@@ -17,6 +17,7 @@ import java.util.*
 
 class PictureOfTheEarthFragment : Fragment() {
 
+
     private var _binding: FragmentPictureOfTheEarthBinding? = null
     private val binding: FragmentPictureOfTheEarthBinding
         get() = _binding!!
