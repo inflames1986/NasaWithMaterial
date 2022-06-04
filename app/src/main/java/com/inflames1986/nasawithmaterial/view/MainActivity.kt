@@ -8,7 +8,7 @@ import com.inflames1986.nasawithmaterial.utils.KEY_CURRENT_THEME
 import com.inflames1986.nasawithmaterial.utils.KEY_SP
 import com.inflames1986.nasawithmaterial.utils.RedTheme
 import com.inflames1986.nasawithmaterial.view.picture.PictureOfTheDayFragment
-
+import com.inflames1986.nasawithmaterial.view.picture.PictureOfTheMarsFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction().replace(
                 R.id.container,
-                PictureOfTheDayFragment.newInstance()
+                PictureOfTheMarsFragment.newInstance()
             ).commit()
         }
     }

@@ -1,14 +1,10 @@
 package ru.geekbrains.nasaapi.repository
 
-
-import com.example.nasaapp.model.data.EarthEpicServerResponseData
-import com.example.nasaapp.model.data.PODServerResponseData
-import com.example.nasaapp.model.data.SputnikServerResponseData
+import com.inflames1986.nasawithmaterial.repository.dto.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.geekbrains.lesson_1314_3_1_main.repository.SolarFlareResponseData
-import ru.geekbrains.nasaapi.repository.dto.MarsPhotosServerResponseData
+
 
 interface RetrofitApi {
 
