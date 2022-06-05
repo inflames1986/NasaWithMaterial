@@ -1,4 +1,4 @@
-package com.gb.m_1919_1872_1.view.layout.coordinator.behavior
+package com.inflames1986.nasawithmaterial.view.layout.coordinator.behavior
 
 import android.content.Context
 import android.util.AttributeSet
@@ -37,5 +37,4 @@ class ButtonBehavior(
 
         return super.onDependentViewChanged(parent, child, dependency)
     }
-
 }
