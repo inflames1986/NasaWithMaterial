@@ -34,9 +34,8 @@ class ShapeableImageBehaivor(
         val bar = dependency as AppBarLayout
         child.alpha = 1 - abs(2 * bar.y) / bar.height.toFloat()
         child.y =
-            (bar.width.toFloat() + child.width.toFloat()) * (1 - abs(2 * bar.y) / bar.height.toFloat())
+            (bar.width.toFloat() + child.width.toFloat()) * (1 - abs(3 * bar.y) / bar.height.toFloat())
         child.setBackgroundResource(R.drawable.bg_earth)
-        child.s
         Log.d("@@@", child.y.toString())
         return super.onDependentViewChanged(parent, child, dependency)
     }
