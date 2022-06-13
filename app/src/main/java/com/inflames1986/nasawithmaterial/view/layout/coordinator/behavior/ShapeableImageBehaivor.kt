@@ -7,8 +7,9 @@ import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.inflames1986.nasawithmaterial.R
+import kotlin.math.abs
 
-class NestedBehavior(
+class ShapeableImageBehaivor(
     context: Context,
     attrs: AttributeSet? = null
 ) : CoordinatorLayout.Behavior<View>(context, attrs) {
@@ -22,6 +23,7 @@ class NestedBehavior(
         return (dependency is AppBarLayout)
     }
 
+
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
         child: View,
@@ -30,7 +32,12 @@ class NestedBehavior(
         Log.d("", "")
 
         val bar = dependency as AppBarLayout
-        child.y = 0 + bar.height.toFloat() + bar.y
+        child.alpha = 1 - abs(2 * bar.y) / bar.height.toFloat()
+        child.y =
+            (bar.width.toFloat() + child.width.toFloat()) * (1 - abs(2 * bar.y) / bar.height.toFloat())
+        child.setBackgroundResource(R.drawable.bg_earth)
+        child.s
+        Log.d("@@@", child.y.toString())
         return super.onDependentViewChanged(parent, child, dependency)
     }
 }

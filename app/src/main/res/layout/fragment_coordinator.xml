@@ -32,7 +32,16 @@
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageVw"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginEnd="0dp"
+        android:background="@color/black"
+        app:layout_behavior=".view.layout.coordinator.behavior.ShapeableImageBehaivor" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -58,5 +67,6 @@
         android:backgroundTint="@color/red"
         app:layout_behavior=".view.layout.coordinator.behavior.ButtonBehavior"
         android:text="+" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

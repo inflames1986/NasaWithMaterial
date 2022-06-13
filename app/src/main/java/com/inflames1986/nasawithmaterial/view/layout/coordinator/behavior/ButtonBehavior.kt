@@ -22,7 +22,6 @@ class ButtonBehavior(
         return (dependency is AppBarLayout)
     }
 
-
     override fun onDependentViewChanged(
         parent: CoordinatorLayout,
         child: View,
