@@ -4,17 +4,17 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:fillColor="?superColor"
+        android:fillColor="@color/fab_plus"
         android:pathData="M12,5L12,19"
         android:strokeWidth="2"
-        android:strokeColor="?superColor"
+        android:strokeColor="@color/fab_plus"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
     <path
-        android:fillColor="?superColor"
+        android:fillColor="@color/fab_plus"
         android:pathData="M5,12L19,12"
         android:strokeWidth="2"
-        android:strokeColor="?superColor"
+        android:strokeColor="@color/fab_plus"
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
 </vector>

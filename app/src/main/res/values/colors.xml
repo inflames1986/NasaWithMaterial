@@ -28,6 +28,7 @@
     <color name="colorAccent40Alfa">#66FBC7CC</color>
     <color name="cardViewbcg">#BE51CBDA</color>
     <color name="spaceFragmentsBcg">#C8292525</color>
+    <color name="fab_plus">#FFFFFF</color>
 
 
 </resources>
