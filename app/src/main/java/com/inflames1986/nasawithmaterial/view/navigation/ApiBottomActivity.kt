@@ -2,6 +2,7 @@ package com.inflames1986.nasawithmaterial.view.navigation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.badge.BadgeDrawable
 import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.ActivityApiBottomBinding
@@ -12,21 +13,36 @@ class ApiBottomActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityApiBottomBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var transaction: FragmentTransaction
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_bottom_navigation_earth -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, EarthFragment.newInstance()).commit()
+                    transaction = supportFragmentManager.beginTransaction()
+                    transaction.setCustomAnimations(
+                        R.animator.slide_in_left,
+                        R.animator.slide_in_right
+                    )
+                    transaction.replace(R.id.container, EarthFragment.newInstance()).commit()
                     true
                 }
+
                 R.id.action_bottom_navigation_system -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SystemFragment.newInstance()).commit()
-                    false
+                    transaction = supportFragmentManager.beginTransaction()
+                    transaction.setCustomAnimations(
+                        R.animator.slide_in_left,
+                        R.animator.slide_in_right
+                    )
+                    transaction.replace(R.id.container, SystemFragment.newInstance()).commit()
+                    true
                 }
+
                 R.id.action_bottom_navigation_mars -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, MarsFragment.newInstance()).commit()
+                    transaction = supportFragmentManager.beginTransaction()
+                    transaction.setCustomAnimations(
+                        R.animator.slide_in_left,
+                        R.animator.slide_in_right
+                    )
+                    transaction.replace(R.id.container, MarsFragment.newInstance()).commit()
                     true
                 }
                 else -> {
@@ -42,9 +58,6 @@ class ApiBottomActivity : AppCompatActivity() {
         badge.maxCharacterCount = 6
         badge.badgeGravity = BadgeDrawable.TOP_END
         binding.bottomNavigation.removeBadge(R.id.action_bottom_navigation_mars)
-//        binding.bottomNavigation.menu.removeItem(R.id.action_bottom_navigation_earth)
-//        binding.bottomNavigation.menu.removeItem(R.id.action_bottom_navigation_system)
-//        binding.bottomNavigation.inflateMenu(R.menu.menu_bottom_navigation_drawer)
 
     }
 }
