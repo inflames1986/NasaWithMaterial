@@ -33,7 +33,12 @@ class AnimationsActivity : AppCompatActivity() {
             isOpen = !isOpen
             if (isOpen) {
                 //constraintSet.clear(R.id.title)
-                constraintSet.connect(R.id.title,ConstraintSet.RIGHT, R.id.backgroundImage,ConstraintSet.LEFT)
+                constraintSet.connect(
+                    R.id.title,
+                    ConstraintSet.RIGHT, R.id.backgroundImage,
+                    ConstraintSet.RIGHT
+
+                )
             } else {
                 constraintSet.connect(
                     R.id.title,
