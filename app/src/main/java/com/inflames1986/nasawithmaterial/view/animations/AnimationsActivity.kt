@@ -37,19 +37,30 @@ class AnimationsActivity : AppCompatActivity() {
                     R.id.title,
                     ConstraintSet.RIGHT, R.id.backgroundImage,
                     ConstraintSet.RIGHT
-
                 )
+
+                constraintSet.connect(
+                    R.id.description,
+                    ConstraintSet.BOTTOM, R.id.backgroundImage,
+                    ConstraintSet.BOTTOM
+                )
+
+
             } else {
                 constraintSet.connect(
                     R.id.title,
                     ConstraintSet.RIGHT, R.id.backgroundImage,
                     ConstraintSet.LEFT
                 )
+
+                constraintSet.connect(
+                    R.id.description,
+                    ConstraintSet.BOTTOM, R.id.backgroundImage,
+                    ConstraintSet.TOP
+                )
             }
 
             constraintSet.applyTo(binding.constraintContainer)
         }
     }
-
-
 }
