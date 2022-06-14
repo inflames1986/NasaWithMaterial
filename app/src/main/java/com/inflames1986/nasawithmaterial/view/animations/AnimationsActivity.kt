@@ -1,86 +1,50 @@
 package com.inflames1986.nasawithmaterial.view.animations
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.ObjectAnimator
 import android.os.Bundle
-import android.view.View
+import android.view.animation.AnticipateOvershootInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import com.inflames1986.nasawithmaterial.databinding.ActivityAnimationsRotateFabBinding
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.transition.ChangeBounds
+import androidx.transition.TransitionManager
+import com.inflames1986.nasawithmaterial.R
+import com.inflames1986.nasawithmaterial.databinding.ActivityAnimationsBonusStartBinding
 
 class AnimationsActivity : AppCompatActivity() {
-    val duration = 1000L
 
-    lateinit var binding: ActivityAnimationsRotateFabBinding
-    var flag = false
+    private val duration: Long = 1000
+
+    var isOpen: Boolean = false
+    private lateinit var binding: ActivityAnimationsBonusStartBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAnimationsRotateFabBinding.inflate(layoutInflater)
+        binding = ActivityAnimationsBonusStartBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.fab.setOnClickListener {
-            flag = !flag
-            if (flag) {
-                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 0f, 405f)
-                    .setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -50f, -260f)
-                    .setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -20f, -130f)
-                    .setDuration(duration).start()
+        binding.backgroundImage.setOnClickListener {
 
-                binding.optionOneContainer.animate()
-                    .alpha(1f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionOneContainer.isClickable = true
-                        }
-                    })
-                binding.optionTwoContainer.animate()
-                    .alpha(1f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionTwoContainer.isClickable = true
-                        }
-                    })
+            val constraintSet = ConstraintSet()
+            constraintSet.clone(binding.constraintContainer)
 
-                binding.transparentBackground.animate()
-                    .alpha(0.5f)
-                    .setDuration(duration)
+            val transition = ChangeBounds()
+            transition.interpolator = AnticipateOvershootInterpolator(5f)
+            transition.duration = 1000
+            TransitionManager.beginDelayedTransition(binding.constraintContainer, transition)
+
+            isOpen = !isOpen
+            if (isOpen) {
+                //constraintSet.clear(R.id.title)
+                constraintSet.connect(R.id.title,ConstraintSet.RIGHT, R.id.backgroundImage,ConstraintSet.LEFT)
             } else {
-                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION, 405f, 0f)
-                    .setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -260f, -50f)
-                    .setDuration(duration).start()
-                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -130f, -20f)
-                    .setDuration(duration).start()
-
-                binding.optionOneContainer.animate()
-                    .alpha(0f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionOneContainer.isClickable = false
-                        }
-                    })
-                binding.optionTwoContainer.animate()
-                    .alpha(0f)
-                    .setDuration(duration / 2)
-                    .setListener(object : AnimatorListenerAdapter() {
-                        override fun onAnimationEnd(animation: Animator?) {
-                            super.onAnimationEnd(animation)
-                            binding.optionTwoContainer.isClickable = false
-                        }
-                    })
-                binding.transparentBackground.animate()
-                    .alpha(0f)
-                    .setDuration(duration)
-
+                constraintSet.connect(
+                    R.id.title,
+                    ConstraintSet.RIGHT, R.id.backgroundImage,
+                    ConstraintSet.LEFT
+                )
             }
+
+            constraintSet.applyTo(binding.constraintContainer)
         }
     }
+
+
 }
