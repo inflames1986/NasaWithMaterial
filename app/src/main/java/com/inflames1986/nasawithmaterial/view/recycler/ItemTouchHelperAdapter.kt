@@ -1,4 +1,4 @@
-package com.gb.m_1919_1872_1.view.recycler
+package com.inflames1986.nasawithmaterial.view.recycler
 
 interface ItemTouchHelperAdapter {
     fun onItemMove(fromPosition: Int, toPosition: Int)

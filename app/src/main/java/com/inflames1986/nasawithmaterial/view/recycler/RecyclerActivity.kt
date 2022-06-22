@@ -3,7 +3,6 @@ package com.inflames1986.nasawithmaterial.view.recycler
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.gb.m_1919_1872_1.view.recycler.ItemTouchHelperCallback
 import com.inflames1986.nasawithmaterial.databinding.ActivityRecyclerBinding
 
 

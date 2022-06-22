@@ -1,8 +1,7 @@
-package com.gb.m_1919_1872_1.view.recycler
+package com.inflames1986.nasawithmaterial.view.recycler
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.inflames1986.nasawithmaterial.view.recycler.RecyclerActivityAdapter
 
 class ItemTouchHelperCallback(private val itemTouchHelperAdapter: ItemTouchHelperAdapter) :
     ItemTouchHelper.Callback() {

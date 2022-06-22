@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.gb.m_1919_1872_1.view.recycler.ItemTouchHelperAdapter
-import com.gb.m_1919_1872_1.view.recycler.ItemTouchHelperViewHolder
 import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.ActivityRecyclerItemEarthBinding
 import com.inflames1986.nasawithmaterial.databinding.ActivityRecyclerItemHeaderBinding
@@ -115,7 +113,7 @@ class RecyclerActivityAdapter(
         return list.size
     }
 
-    class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view) { // TODO WH :BaseViewHolder
+    class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
         fun myBind(listItem: Pair<Data, Boolean>) {
             /*(itemView as ConstraintLayout).findViewById<TextView>(R.id.title).text = data.someText
             (itemView as ConstraintLayout).findViewById<TextView>(R.id.descriptionTextView).text = data.someDescription*/
@@ -128,6 +126,14 @@ class RecyclerActivityAdapter(
                 title.text = listItem.first.someText
                 descriptionTextView.text = listItem.first.someDescription
             }
+        }
+
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemClear() {
+            itemView.setBackgroundColor(0)
         }
     }
 
