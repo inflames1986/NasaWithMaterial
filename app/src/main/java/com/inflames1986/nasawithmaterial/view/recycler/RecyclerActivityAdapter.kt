@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,7 @@ class RecyclerActivityAdapter(
     private var list: MutableList<Pair<Data, Boolean>>,
     private var onListItemClickListener: OnListItemClickListener
 ) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
+    RecyclerView.Adapter<BaseViewHolder>(), ItemTouchHelperAdapter {
 
 
     fun setList(newList: List<Pair<Data, Boolean>>) {
@@ -44,29 +45,24 @@ class RecyclerActivityAdapter(
         return list[position].first.type
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
-            TYPE_EARTH -> {
-                val view =
-                    ActivityRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context))
-                EarthViewHolder(view.root)
-            }
-            TYPE_MARS -> {
-                val view =
-                    ActivityRecyclerItemMarsBinding.inflate(LayoutInflater.from(parent.context))
-                MarsViewHolder(view.root)
-            }
-            TYPE_HEADER -> {
-                val view =
-                    ActivityRecyclerItemHeaderBinding.inflate(LayoutInflater.from(parent.context))
-                HeaderViewHolder(view.root)
-            }
-            else -> {
-                val view =
-                    ActivityRecyclerItemMarsBinding.inflate(LayoutInflater.from(parent.context))
-                MarsViewHolder(view.root)
-            }
+            TYPE_EARTH -> EarthViewHolder(
+                inflater.inflate(R.layout.activity_recycler_item_earth, parent, false)
+                        as View
+            )
+            TYPE_MARS ->
+                MarsViewHolder(
+                    inflater.inflate(R.layout.activity_recycler_item_mars, parent,
+                        false) as View
+                )
+            else -> HeaderViewHolder(
+                inflater.inflate(R.layout.activity_recycler_item_header, parent,
+                    false) as View
+            )
         }
+
 
     }
 
@@ -113,7 +109,7 @@ class RecyclerActivityAdapter(
         return list.size
     }
 
-    class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
+    inner class EarthViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
         fun myBind(listItem: Pair<Data, Boolean>) {
             /*(itemView as ConstraintLayout).findViewById<TextView>(R.id.title).text = data.someText
             (itemView as ConstraintLayout).findViewById<TextView>(R.id.descriptionTextView).text = data.someDescription*/
@@ -135,18 +131,32 @@ class RecyclerActivityAdapter(
         override fun onItemClear() {
             itemView.setBackgroundColor(0)
         }
+
+        override fun bind(data: Data) {
+
+                if (layoutPosition != RecyclerView.NO_POSITION) {
+                    itemView.findViewById<TextView>(R.id.descriptionTextView).text =
+                        data.someDescription
+                    itemView.findViewById<ImageView>(R.id.wikiImageView).setOnClickListener {
+                        onListItemClickListener.onItemClick(data) }
+                }
+        }
     }
 
-    class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) { // TODO WH :BaseViewHolder
+    inner class HeaderViewHolder(view: View) : BaseViewHolder(view) { // TODO WH :BaseViewHolder
         fun myBind(listItem: Pair<Data, Boolean>) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
                 header.text = listItem.first.someText
             }
         }
+
+        override fun bind(data: Data) {
+            TODO("Not yet implemented")
+        }
     }
 
     inner class MarsViewHolder(view: View) :
-        RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
+        BaseViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
         fun myBind(listItem: Pair<Data, Boolean>) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
                 title.text = listItem.first.someText
@@ -187,6 +197,10 @@ class RecyclerActivityAdapter(
         override fun onItemClear() {
             itemView.setBackgroundColor(0)
         }
+
+        override fun bind(data: Data) {
+            TODO("Not yet implemented")
+        }
     }
 
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
@@ -200,4 +214,9 @@ class RecyclerActivityAdapter(
         list.removeAt(position)
         notifyItemRemoved(position)
     }
+
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(list[position].first)
+    }
+
 }
