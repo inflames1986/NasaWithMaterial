@@ -1,12 +1,10 @@
 package com.inflames1986.nasawithmaterial.view.recycler
 
 import android.graphics.Color
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -16,18 +14,20 @@ import com.inflames1986.nasawithmaterial.R
 import com.inflames1986.nasawithmaterial.databinding.ActivityRecyclerItemEarthBinding
 import com.inflames1986.nasawithmaterial.databinding.ActivityRecyclerItemHeaderBinding
 import com.inflames1986.nasawithmaterial.databinding.ActivityRecyclerItemMarsBinding
-import kotlinx.coroutines.NonDisposableHandle.parent
 
 const val TYPE_EARTH = 1
 const val TYPE_MARS = 2
 const val TYPE_HEADER = 3
 
-class RecyclerActivityAdapter(private var list: MutableList<Pair<Data, Boolean>>,private var onListItemClickListener: OnListItemClickListener) :
+class RecyclerActivityAdapter(
+    private var list: MutableList<Pair<Data, Boolean>>,
+    private var onListItemClickListener: OnListItemClickListener
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>(), ItemTouchHelperAdapter {
 
 
     fun setList(newList: List<Pair<Data, Boolean>>) {
-        val result = DiffUtil.calculateDiff(DiffUtilCallback(list,newList))
+        val result = DiffUtil.calculateDiff(DiffUtilCallback(list, newList))
         result.dispatchUpdatesTo(this)
         this.list = newList.toMutableList()
     }
@@ -77,20 +77,21 @@ class RecyclerActivityAdapter(private var list: MutableList<Pair<Data, Boolean>>
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if(payloads.isEmpty()){
+        if (payloads.isEmpty()) {
             super.onBindViewHolder(holder, position, payloads)
-        }else{
+        } else {
             when (getItemViewType(position)) { // TODO WH создать BaseViewHolder
                 TYPE_EARTH -> {
                     //(holder as EarthViewHolder).itemView.findViewById<TextView>(R.id.title).text =
                 }
                 TYPE_MARS -> {
                     val res = createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
-                    if(res.oldData.first.someText!=res.newData.first.someText)
-                    (holder as MarsViewHolder).itemView.findViewById<TextView>(R.id.title).text =res.newData.first.someText
+                    if (res.oldData.first.someText != res.newData.first.someText)
+                        (holder as MarsViewHolder).itemView.findViewById<TextView>(R.id.title).text =
+                            res.newData.first.someText
                 }
                 TYPE_HEADER -> {
-                   // (holder as HeaderViewHolder).myBind(list[position])
+                    // (holder as HeaderViewHolder).myBind(list[position])
                 }
             }
         }
@@ -115,7 +116,7 @@ class RecyclerActivityAdapter(private var list: MutableList<Pair<Data, Boolean>>
     }
 
     class EarthViewHolder(view: View) : RecyclerView.ViewHolder(view) { // TODO WH :BaseViewHolder
-        fun myBind(listItem: Pair<Data,Boolean>) {
+        fun myBind(listItem: Pair<Data, Boolean>) {
             /*(itemView as ConstraintLayout).findViewById<TextView>(R.id.title).text = data.someText
             (itemView as ConstraintLayout).findViewById<TextView>(R.id.descriptionTextView).text = data.someDescription*/
 
@@ -124,14 +125,14 @@ class RecyclerActivityAdapter(private var list: MutableList<Pair<Data, Boolean>>
             binding.descriptionTextView.text = data.someDescription*/
 
             (ActivityRecyclerItemEarthBinding.bind(itemView)).apply {
-                title.text =  listItem.first.someText
-                descriptionTextView.text =  listItem.first.someDescription
+                title.text = listItem.first.someText
+                descriptionTextView.text = listItem.first.someDescription
             }
         }
     }
 
     class HeaderViewHolder(view: View) : RecyclerView.ViewHolder(view) { // TODO WH :BaseViewHolder
-        fun myBind(listItem: Pair<Data,Boolean>) {
+        fun myBind(listItem: Pair<Data, Boolean>) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
                 header.text = listItem.first.someText
             }
@@ -140,9 +141,9 @@ class RecyclerActivityAdapter(private var list: MutableList<Pair<Data, Boolean>>
 
     inner class MarsViewHolder(view: View) :
         RecyclerView.ViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
-        fun myBind(listItem: Pair<Data,Boolean>) {
+        fun myBind(listItem: Pair<Data, Boolean>) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
-                title.text =  listItem.first.someText
+                title.text = listItem.first.someText
                 marsImageView.load(R.drawable.bg_mars)
                 addItemImageView.setOnClickListener {
                     onListItemClickListener.onAddBtnClick(layoutPosition)
@@ -167,7 +168,8 @@ class RecyclerActivityAdapter(private var list: MutableList<Pair<Data, Boolean>>
                     list[layoutPosition] = list[layoutPosition].let {
                         it.first to !it.second
                     }
-                    marsDescriptionTextView.visibility = if(list[layoutPosition].second) View.VISIBLE else View.GONE
+                    marsDescriptionTextView.visibility =
+                        if (list[layoutPosition].second) View.VISIBLE else View.GONE
                 }
             }
         }
