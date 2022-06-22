@@ -54,44 +54,49 @@ class RecyclerActivityAdapter(
             )
             TYPE_MARS ->
                 MarsViewHolder(
-                    inflater.inflate(R.layout.activity_recycler_item_mars, parent,
-                        false) as View
+                    inflater.inflate(
+                        R.layout.activity_recycler_item_mars, parent,
+                        false
+                    ) as View
                 )
             else -> HeaderViewHolder(
-                inflater.inflate(R.layout.activity_recycler_item_header, parent,
-                    false) as View
+                inflater.inflate(
+                    R.layout.activity_recycler_item_header, parent,
+                    false
+                ) as View
             )
         }
 
 
     }
 
-    override fun onBindViewHolder(
-        holder: RecyclerView.ViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        if (payloads.isEmpty()) {
-            super.onBindViewHolder(holder, position, payloads)
-        } else {
-            when (getItemViewType(position)) { // TODO WH создать BaseViewHolder
-                TYPE_EARTH -> {
-                    //(holder as EarthViewHolder).itemView.findViewById<TextView>(R.id.title).text =
-                }
-                TYPE_MARS -> {
-                    val res = createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
-                    if (res.oldData.first.someText != res.newData.first.someText)
-                        (holder as MarsViewHolder).itemView.findViewById<TextView>(R.id.title).text =
-                            res.newData.first.someText
-                }
-                TYPE_HEADER -> {
-                    // (holder as HeaderViewHolder).myBind(list[position])
-                }
-            }
-        }
-    }
+//    override fun onBindViewHolder(
+//        holder: RecyclerView.ViewHolder,
+//        position: Int,
+//        payloads: MutableList<Any>
+//    ) {
+//        if (payloads.isEmpty()) {
+//            super.onBindViewHolder(holder, position, payloads)
+//        } else {
+//            when (getItemViewType(position)) {
+//                TYPE_EARTH -> {
+//                    //(holder as EarthViewHolder).itemView.findViewById<TextView>(R.id.title).text =
+//                }
+//                TYPE_MARS -> {
+//                    val res = createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
+//                    if (res.oldData.first.someText != res.newData.first.someText)
+//                        (holder as MarsViewHolder).itemView.findViewById<TextView>(R.id.title).text =
+//                            res.newData.first.someText
+//                }
+//                TYPE_HEADER -> {
+//                    // (holder as HeaderViewHolder).myBind(list[position])
+//                }
+//            }
+//        }
+//    }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(list[position].first)
         when (getItemViewType(position)) { // TODO WH создать BaseViewHolder
             TYPE_EARTH -> {
                 (holder as EarthViewHolder).myBind(list[position])
@@ -109,14 +114,9 @@ class RecyclerActivityAdapter(
         return list.size
     }
 
-    inner class EarthViewHolder(view: View) : BaseViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
+    inner class EarthViewHolder(view: View) : BaseViewHolder(view),
+        ItemTouchHelperViewHolder {
         fun myBind(listItem: Pair<Data, Boolean>) {
-            /*(itemView as ConstraintLayout).findViewById<TextView>(R.id.title).text = data.someText
-            (itemView as ConstraintLayout).findViewById<TextView>(R.id.descriptionTextView).text = data.someDescription*/
-
-            /*val binding = ActivityRecyclerItemEarthBinding.bind(itemView)
-            binding.title.text =data.someText
-            binding.descriptionTextView.text = data.someDescription*/
 
             (ActivityRecyclerItemEarthBinding.bind(itemView)).apply {
                 title.text = listItem.first.someText
@@ -134,29 +134,32 @@ class RecyclerActivityAdapter(
 
         override fun bind(data: Data) {
 
-                if (layoutPosition != RecyclerView.NO_POSITION) {
-                    itemView.findViewById<TextView>(R.id.descriptionTextView).text =
-                        data.someDescription
-                    itemView.findViewById<ImageView>(R.id.wikiImageView).setOnClickListener {
-                        onListItemClickListener.onItemClick(data) }
+            if (layoutPosition != RecyclerView.NO_POSITION) {
+                itemView.findViewById<TextView>(R.id.descriptionTextView).text =
+                    data.someDescription
+                itemView.findViewById<ImageView>(R.id.wikiImageView).setOnClickListener {
+                    onListItemClickListener.onItemClick(data)
                 }
+            }
         }
     }
 
-    inner class HeaderViewHolder(view: View) : BaseViewHolder(view) { // TODO WH :BaseViewHolder
+    inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
         fun myBind(listItem: Pair<Data, Boolean>) {
             (ActivityRecyclerItemHeaderBinding.bind(itemView)).apply {
                 header.text = listItem.first.someText
             }
         }
 
+
         override fun bind(data: Data) {
-            TODO("Not yet implemented")
+            itemView.setOnClickListener { onListItemClickListener.onItemClick(data) }
         }
     }
 
+
     inner class MarsViewHolder(view: View) :
-        BaseViewHolder(view), ItemTouchHelperViewHolder { // TODO WH :BaseViewHolder
+        BaseViewHolder(view), ItemTouchHelperViewHolder {
         fun myBind(listItem: Pair<Data, Boolean>) {
             (ActivityRecyclerItemMarsBinding.bind(itemView)).apply {
                 title.text = listItem.first.someText
@@ -199,7 +202,9 @@ class RecyclerActivityAdapter(
         }
 
         override fun bind(data: Data) {
-            TODO("Not yet implemented")
+            itemView.findViewById<ImageView>(R.id.marsImageView).setOnClickListener {
+                onListItemClickListener.onItemClick(data)
+            }
         }
     }
 
@@ -215,8 +220,8 @@ class RecyclerActivityAdapter(
         notifyItemRemoved(position)
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-        holder.bind(list[position].first)
-    }
+//    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+//        holder.bind(list[position].first)
+//    }
 
 }
