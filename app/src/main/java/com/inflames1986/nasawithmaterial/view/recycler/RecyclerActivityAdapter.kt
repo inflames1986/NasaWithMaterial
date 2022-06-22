@@ -1,6 +1,7 @@
 package com.inflames1986.nasawithmaterial.view.recycler
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,38 +67,11 @@ class RecyclerActivityAdapter(
                 ) as View
             )
         }
-
-
     }
-
-//    override fun onBindViewHolder(
-//        holder: RecyclerView.ViewHolder,
-//        position: Int,
-//        payloads: MutableList<Any>
-//    ) {
-//        if (payloads.isEmpty()) {
-//            super.onBindViewHolder(holder, position, payloads)
-//        } else {
-//            when (getItemViewType(position)) {
-//                TYPE_EARTH -> {
-//                    //(holder as EarthViewHolder).itemView.findViewById<TextView>(R.id.title).text =
-//                }
-//                TYPE_MARS -> {
-//                    val res = createCombinedPayload(payloads as List<Change<Pair<Data, Boolean>>>)
-//                    if (res.oldData.first.someText != res.newData.first.someText)
-//                        (holder as MarsViewHolder).itemView.findViewById<TextView>(R.id.title).text =
-//                            res.newData.first.someText
-//                }
-//                TYPE_HEADER -> {
-//                    // (holder as HeaderViewHolder).myBind(list[position])
-//                }
-//            }
-//        }
-//    }
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
         holder.bind(list[position].first)
-        when (getItemViewType(position)) { // TODO WH создать BaseViewHolder
+        when (getItemViewType(position)) {
             TYPE_EARTH -> {
                 (holder as EarthViewHolder).myBind(list[position])
             }
@@ -151,12 +125,10 @@ class RecyclerActivityAdapter(
             }
         }
 
-
         override fun bind(data: Data) {
             itemView.setOnClickListener { onListItemClickListener.onItemClick(data) }
         }
     }
-
 
     inner class MarsViewHolder(view: View) :
         BaseViewHolder(view), ItemTouchHelperViewHolder {
@@ -170,17 +142,28 @@ class RecyclerActivityAdapter(
                 removeItemImageView.setOnClickListener {
                     onListItemClickListener.onRemoveBtnClick(layoutPosition)
                 }
-                moveItemDown.setOnClickListener { // TODO IndexOutOfBoundsException
-                    list.removeAt(layoutPosition).apply {
-                        list.add(layoutPosition + 1, this)
+                moveItemDown.setOnClickListener {
+                    try {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition + 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition + 1)
+                    } catch (e: IndexOutOfBoundsException) {
+                        Log.d("@@@", "Невозможно переместить элемент вниз, достигнут предел, ${e.toString()}")
                     }
-                    notifyItemMoved(layoutPosition, layoutPosition + 1)
                 }
-                moveItemUp.setOnClickListener { // TODO IndexOutOfBoundsException: Index: -1
-                    list.removeAt(layoutPosition).apply {
-                        list.add(layoutPosition - 1, this)
+                moveItemUp.setOnClickListener {
+                    try {
+                        list.removeAt(layoutPosition).apply {
+                            list.add(layoutPosition - 1, this)
+                        }
+                        notifyItemMoved(layoutPosition, layoutPosition - 1)
+                    } catch (e: IndexOutOfBoundsException) {
+                        Log.d(
+                            "@@@",
+                            "Невозможно переместить элемент вверх, длостигнут предел, ${e.toString()}"
+                        )
                     }
-                    notifyItemMoved(layoutPosition, layoutPosition - 1)
                 }
 
                 marsImageView.setOnClickListener {
@@ -219,9 +202,4 @@ class RecyclerActivityAdapter(
         list.removeAt(position)
         notifyItemRemoved(position)
     }
-
-//    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
-//        holder.bind(list[position].first)
-//    }
-
 }
