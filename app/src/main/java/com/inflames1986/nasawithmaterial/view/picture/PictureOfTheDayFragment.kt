@@ -187,16 +187,19 @@ class PictureOfTheDayFragment : Fragment() {
 
 
                 val lineHeightInPx = 100
-                spannableString.setSpan(LineHeightSpan.Standard(lineHeightInPx), 33, 42, SPAN_EXCLUSIVE_EXCLUSIVE)
-                spannableString.setSpan(LineHeightSpan.Standard(lineHeightInPx), 46, 54, SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(LineHeightSpan.Standard(lineHeightInPx), 33, 45, SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(LineHeightSpan.Standard(lineHeightInPx), 47, 58, SPAN_EXCLUSIVE_EXCLUSIVE)
 
 
                 val leadingMarginInPx = 200
-                spannableString.setSpan(LeadingMarginSpan.Standard(leadingMarginInPx), 55, 63, SPAN_EXCLUSIVE_EXCLUSIVE)
-                spannableString.setSpan(LeadingMarginSpan.Standard(leadingMarginInPx), 66, 74, SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(LeadingMarginSpan.Standard(leadingMarginInPx), 60, 71, SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(LeadingMarginSpan.Standard(leadingMarginInPx), 73, textSpannable.length, SPAN_EXCLUSIVE_EXCLUSIVE)
 
                 val color = ContextCompat.getColor(requireContext(), android.R.color.holo_blue_light)
-                spannableString.setSpan(BackgroundColorSpan(color), 46, 58, SPAN_EXCLUSIVE_EXCLUSIVE)
+                val color2 = ContextCompat.getColor(requireContext(), android.R.color.holo_red_dark)
+                spannableString.setSpan(BackgroundColorSpan(color), 47, 58, SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(BackgroundColorSpan(color2), 33, 45, SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(BackgroundColorSpan(color), 60, 71, SPAN_EXCLUSIVE_EXCLUSIVE)
 
                 binding.lifeHack.explanation.text=spannableString
             }
