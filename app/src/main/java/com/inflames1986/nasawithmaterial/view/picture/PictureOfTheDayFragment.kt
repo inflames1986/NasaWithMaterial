@@ -2,7 +2,13 @@ package com.inflames1986.nasawithmaterial.view.picture
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
+import android.text.style.BulletSpan
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.*
 import androidx.core.content.ContextCompat
@@ -84,7 +90,7 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         val bottomSheetBehavior = BottomSheetBehavior.from(binding.lifeHack.bottomSheetContainer)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
 
         bottomSheetBehavior.addBottomSheetCallback(object :
@@ -122,25 +128,6 @@ class PictureOfTheDayFragment : Fragment() {
             }
             isMain = !isMain
         }
-
-
-        binding.chipGroup.setOnCheckedChangeListener { group, position ->
-            /* TODO HW
-             when(position){
-                1->{viewModel.sendRequestToday()}
-                2->{viewModel.sendRequestYT()}
-                3->{viewModel.sendRequestTDBY()}
-            }
-
-            when(position){
-                1->{viewModel.sendRequest(date)}
-                2->{viewModel.sendRequest(date-1)}
-                3->{viewModel.sendRequest(date-2)}
-            }*/
-            group.findViewById<Chip>(position)?.let{
-                Log.d("@@@", "${it.text.toString()} $position")
-            }
-        }
     }
 
 
@@ -165,6 +152,52 @@ class PictureOfTheDayFragment : Fragment() {
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.title
                 binding.lifeHack.explanation.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.explanation
+
+                val textSpannable = "My text \nbullet one \nbullet two"
+
+
+                val spannedString: SpannedString
+                val spannableString: SpannableString = SpannableString(textSpannable)
+                val spannableStringBuilder: SpannableStringBuilder
+
+                /*val split = textSpannable.split("\n").toMutableList()
+                repeat(split.size){
+                    if(it>0)
+                    split[it] = "/n${split[it]}"
+                }*/
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+
+                    /* var counter = 0
+                     split.forEach {
+                         val startPosition = counter
+                         val endPosition = counter+it.length
+                         spannableString.setSpan(BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700),10),
+                             counter,counter+it.length,SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                         counter+=it.length
+                     }*/
+
+
+
+
+                    spannableString.setSpan(
+                        BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700),10),
+                        9,18, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                    spannableString.setSpan(
+                        BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700),10),
+                        21,textSpannable.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }else{
+                    spannableString.setSpan(
+                        BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700)),
+                        9,19, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+
+                spannableString.setSpan( ForegroundColorSpan(ContextCompat.getColor(requireContext(),R.color.red_700)),
+                    8,19, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                spannableString.setSpan( ForegroundColorSpan(ContextCompat.getColor(requireContext(),R.color.blue)),
+                    21,textSpannable.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                binding.lifeHack.explanation.text=spannableString
             }
         }
     }
