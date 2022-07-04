@@ -6,11 +6,14 @@ import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.SpannedString
 import android.text.style.BulletSpan
 import android.text.style.ForegroundColorSpan
+import android.text.style.LineHeightSpan
 import android.util.Log
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -74,6 +77,7 @@ class PictureOfTheDayFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -131,6 +135,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun renderData(pictureOfTheDayAppState: PictureOfTheDayAppState) {
         when (pictureOfTheDayAppState) {
             is PictureOfTheDayAppState.Error -> {
@@ -153,31 +158,14 @@ class PictureOfTheDayFragment : Fragment() {
                 binding.lifeHack.explanation.text =
                     pictureOfTheDayAppState.pictureOfTheDayResponseData.explanation
 
-                val textSpannable = "My text \nbullet one \nbullet two"
+                val textSpannable = "My text \nbullet one \nbullet two \nbullet three \nbullet four \nbullet five \nbullet six"
 
 
                 val spannedString: SpannedString
                 val spannableString: SpannableString = SpannableString(textSpannable)
                 val spannableStringBuilder: SpannableStringBuilder
 
-                /*val split = textSpannable.split("\n").toMutableList()
-                repeat(split.size){
-                    if(it>0)
-                    split[it] = "/n${split[it]}"
-                }*/
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-
-                    /* var counter = 0
-                     split.forEach {
-                         val startPosition = counter
-                         val endPosition = counter+it.length
-                         spannableString.setSpan(BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700),10),
-                             counter,counter+it.length,SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
-                         counter+=it.length
-                     }*/
-
-
 
 
                     spannableString.setSpan(
@@ -185,7 +173,7 @@ class PictureOfTheDayFragment : Fragment() {
                         9,18, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
                     spannableString.setSpan(
                         BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700),10),
-                        21,textSpannable.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+                        21,31, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
                 }else{
                     spannableString.setSpan(
                         BulletSpan(20, ContextCompat.getColor(requireContext(),R.color.red_700)),
@@ -197,6 +185,16 @@ class PictureOfTheDayFragment : Fragment() {
 
                 spannableString.setSpan( ForegroundColorSpan(ContextCompat.getColor(requireContext(),R.color.blue)),
                     21,textSpannable.length, SpannedString.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+
+                val lineHeightInPx = 100
+                spannableString.setSpan(LineHeightSpan.Standard(lineHeightInPx), 33, 42, SPAN_EXCLUSIVE_EXCLUSIVE)
+
+                spannableString.setSpan(LineHeightSpan.Standard(lineHeightInPx), 44, 53, SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+
                 binding.lifeHack.explanation.text=spannableString
             }
         }
