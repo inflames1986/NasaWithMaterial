@@ -20,7 +20,6 @@ SplashActivity : AppCompatActivity() { //TODO HW single-activity пытаемс�
         /*ObjectAnimator.ofFloat(findViewById<ImageView>(R.id.imageView), View.ROTATION, 720f)
             .setDuration(4000).start()*/
 
-
         findViewById<ImageView>(R.id.imageView).animate().rotationBy(720f).setDuration(4000).start()
         Handler(mainLooper).postDelayed({
             startActivity(Intent(this@SplashActivity, MainActivity::class.java))
